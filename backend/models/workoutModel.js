@@ -1,18 +1,18 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
-const workoutSchema = Schema({
+const workoutSchema = new Schema({
   title:{
     type: String,
-    require: true,
+    required: true,
   },
   reps:{
     type: Number,
-    require: true
+    required: true
   },
   load:{
     type: Number,
-    require: true
+    required: true
   }
 },{timestamps: true})
 

@@ -3,6 +3,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const app = express()
 const workoutsRoutes = require("./routes/workouts")
+const userRoutes = require("./routes/user")
 
 // middleware
 app.use( (req,res,next) => {
@@ -13,6 +14,7 @@ app.use(express.json())
 
 //routes
 app.use("/api/workouts", workoutsRoutes)
+app.use("/api/users", userRoutes)
 
 
 //connection to the database
