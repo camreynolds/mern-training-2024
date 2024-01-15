@@ -2,6 +2,7 @@ require("dotenv").config()
 const express = require("express")
 const mongoose = require("mongoose")
 const app = express()
+const workoutRoutes = require("./routes/workoutRoutes")
 
 app.use(express.json())
 app.use((req,res,next) =>{
@@ -9,9 +10,7 @@ app.use((req,res,next) =>{
     next()
 })
 
-app.get("/", (req,res) =>{
-	res.status(200).json("Welcome to the app.")
-})
+app.use("/api/workouts", workoutRoutes)
 
 mongoose.connect(process.env.MONGO_DB)
 	.then( () => {
