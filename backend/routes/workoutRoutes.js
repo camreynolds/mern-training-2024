@@ -5,6 +5,9 @@ const { getAllWorkouts,
         updateSingleWorkout,
         deleteSingleWorkout } = require("../controllers/workoutControllers")
 const route = express.Router()
+const requireAuth = require("../middleware/requireAuth")
+
+route.use(requireAuth)
 
 route.get("/", getAllWorkouts)
 route.get("/:id", getSingleWorkout)

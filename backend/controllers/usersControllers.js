@@ -2,8 +2,8 @@ require("dotenv").config()
 const User = require("../models/userModel")
 const jwt = require("jsonwebtoken")
 
-const createToken = (id) =>{
-  return jwt.sign({id}, process.env.SECRET)
+const createToken = (_id) =>{
+  return jwt.sign({_id}, process.env.SECRET,{expiresIn: "10m"})
 }
 
 const usersLogin = async (req,res) =>{
