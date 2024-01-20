@@ -9,6 +9,7 @@ const WorkoutForm = () =>{
   const [error,setError] = useState(null)
   const {dispatch} = useWorkoutContext()
   const {user} = useAuth()
+  const [isEmpty, setIsEmpty] = useState([])
   
   const handleSubmit = (e) =>{
     e.preventDefault()
@@ -32,6 +33,7 @@ const WorkoutForm = () =>{
 
       if(!response.ok){
         setError(json.error)
+        setIsEmpty(json.isEmpty)
       }
 
       if(response.ok){
@@ -39,6 +41,7 @@ const WorkoutForm = () =>{
         setTitle("")
         setLoad("")
         setReps("")
+        setIsEmpty([])
         console.log("Workout created: ",json);
         dispatch({type: "CREATE_WORKOUT", payload:json})
       }
@@ -56,6 +59,7 @@ const WorkoutForm = () =>{
       type="text"
       onChange={ e => setTitle(e.target.value)}
       value={title}
+      className={ isEmpty.includes("title") ? "error" : "" }
     />
 
     <label>Load (in Kg):</label>
@@ -63,6 +67,7 @@ const WorkoutForm = () =>{
       type="number"
       onChange={e => setLoad(e.target.value)}
       value={load}
+      className={ isEmpty.includes("load") ? "error" : ""}
     />
 
     <label>Reps:</label>
@@ -70,7 +75,7 @@ const WorkoutForm = () =>{
       type="number"
       onChange={e => setReps(e.target.value)}
       value={reps}
-    />
+      className={ isEmpty.includes("reps") ? "error" : ""}   />
 
     <button>Add workout</button>
     {error && <div className="error">{error}</div>}

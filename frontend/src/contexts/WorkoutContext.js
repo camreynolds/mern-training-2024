@@ -4,7 +4,7 @@
 
   export const workoutReducer = (state,action) =>{
     switch(action.type){
-      case "GET_WORKOUTS":
+      case "SET_WORKOUTS":
       return{
           workouts: action.payload
       }
