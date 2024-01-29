@@ -3,13 +3,15 @@ const express = require("express")
 const mongoose = require("mongoose")
 const app = express()
 const workoutsRouter = require("./routers/workoutsRouter")
+const usersRouter = require("./routers/usersRouter")
 
 app.use( (req,res,next) =>{
   console.log(req.path, req.method)
   next()
 })
 app.use(express.json())
-app.use("/api/workouts/",workoutsRouter)
+app.use("/api/workouts",workoutsRouter)
+app.use("/api/users", usersRouter)
 
 mongoose.connect(process.env.MONGO_URI)
   .then(
