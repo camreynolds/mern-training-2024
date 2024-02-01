@@ -121,10 +121,17 @@ nav button {
 }
 
 /* auth forms */
-form.signup, form.login {
+form.signup, form.login, form.forgot-password, form.reset-password {
   max-width: 400px;
   margin: 40px auto;
   padding: 20px;
   background: #fff;
   border-radius: 4px;
+}
+
+form.login a{
+  text-decoration: none;
+  display: block;
+  margin-top: 10px;
+  color: var(--error)
 }
