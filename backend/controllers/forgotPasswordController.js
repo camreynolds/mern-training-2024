@@ -48,7 +48,7 @@ const forgotPasswordController = async (req,res) =>{
       if(error){
         res.status(400).json({error: "unable to send mail."})
       }
-      res.status(200).json(info.response)
+      res.status(200).json({mssg: "please, check you email receipt!", data: info.response})
     })
   } catch (error) {
     res.status(400).json({error: "unable to send mail."})

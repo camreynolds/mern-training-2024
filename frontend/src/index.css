@@ -5,6 +5,7 @@
 :root {
   --primary: #1aac83;
   --error: #e7195a;
+  --disabled: #cdf8ec;
 }
 body {
   background: #f1f1f1;
@@ -89,11 +90,22 @@ form button {
   border-radius: 4px;
   cursor: pointer;
 }
+form button.disabled{
+  background: var(--disabled);
+}
 div.error {
   padding: 10px;
   background: #ffefef;
   border: 1px solid var(--error);
   color: var(--error);
+  border-radius: 4px;
+  margin: 20px 0;
+}
+div.success {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--primary);
+  color: var(--primary);
   border-radius: 4px;
   margin: 20px 0;
 }

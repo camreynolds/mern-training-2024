@@ -22,7 +22,7 @@ const Signup = () =>{
         value={email}
       />
 
-      <label>Password:</label>
+      <label>password:</label>
       <input
         type="password"
         onChange={e => setPassword(e.target.value)}

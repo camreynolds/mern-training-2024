@@ -5,10 +5,13 @@ import {useNavigate} from "react-router-dom"
 const ForgotPassword = () =>{
   const [email,setEmail] = useState("")
   const [error,setError] = useState(null)
+  const [success,setSuccess] = useState(null)
+  const [isLoading,setIsLoading] = useState(false)
   const navigate = useNavigate()
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
+    setIsLoading(true)
 
     const response = await fetch("/api/forgot-password",{
       method: "POST",
@@ -22,13 +25,18 @@ const ForgotPassword = () =>{
 
     if(!response.ok){
       setError(json.error)
+      setIsLoading(false)
     }
 
     if(response.ok){
       setError(null)
       setEmail("")
-      navigate("/login")
-      console.log(json)
+      console.log(json.data)
+      setSuccess(json.mssg)
+      setIsLoading(false)
+      setTimeout( () =>{
+        navigate("/login")
+      },3000) 
     }
   }
 
@@ -45,8 +53,9 @@ const ForgotPassword = () =>{
         value={email}
       />
 
-      <button>send</button>
+      <button className={isLoading ? "disabled" : ""} disabled={isLoading}>send</button>
       {error && <div className="error">{error}</div> }
+      {success && <div className="success">{success}</div> }
     </form>
   )
 }

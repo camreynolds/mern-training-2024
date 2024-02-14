@@ -35,7 +35,7 @@ const Login = () =>{
       {error && <div className="error">{error}</div> }
 
       <div>
-        <Link to="/forgot-password"><em>forgot your password?</em></Link>
+        <Link to="/forgot-password">forgot your password?</Link>
       </div>
     </form>
   )
