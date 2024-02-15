@@ -5,6 +5,7 @@ const mongoose = require("mongoose")
 
 //* Routes
 const workoutRoutes = require("./routes/workoutRoutes")
+const usersRoutes = require("./routes/usersRoutes")
 
 //middleware
 app.use( (req,res,next) =>{
@@ -13,6 +14,7 @@ app.use( (req,res,next) =>{
 })
 app.use(express.json())
 app.use("/api/workouts", workoutRoutes)
+app.use("/api/users", usersRoutes)
 
 mongoose.connect(process.env.MONGO_URI)
   .then(
