@@ -1,11 +1,29 @@
+const mongoose = require("mongoose")
 const Workout = require("../models/workoutModel")
 
-const getAllWorkouts = (req,res) =>{
-  res.status(200).json({mssg: "get all the workouts."})
+const getAllWorkouts = async (req,res) =>{
+  try{
+    const workouts = await Workout.find({}).sort({createdAt: -1})
+    res.status(200).json(workouts)
+  }catch(error){
+    res.status(400).json({error: "couldn't load workouts."})
+  }
 }
 
-const getSingleWorkout = (req,res) =>{
-  res.status(200).json({mssg: "get a single workout."})
+const getSingleWorkout = async (req,res) =>{
+  const {_id} = req.params
+
+  if(!mongoose.Types.ObjectId.isValid(_id)){
+    return res.status(400).json({error: "this is not a valid id."})
+  }
+
+  const workout = await Workout.findById({_id})
+
+  if(!workout){
+    return res.status(400).json({error: "not such workout."})
+  }
+
+  res.status(200).json(workout)
 }
 
 const createSingleWorkout = async (req,res) =>{
@@ -36,12 +54,36 @@ const createSingleWorkout = async (req,res) =>{
   }
 }
 
-const updateSingleWorkout = (req,res) =>{
-  res.status(200).json({mssg: "update a single workout."})
+const updateSingleWorkout = async (req,res) =>{
+  const {_id} = req.params 
+
+  if(!mongoose.Types.ObjectId.isValid(_id)){
+    return res.status(400).json({error: "this is not a valid id."})
+  }
+
+  const workout = await Workout.findByIdAndUpdate({_id},{...req.body})
+
+  if(!workout){
+    return res.status(400).json({error: "not such a workout."})
+  }
+  
+  res.status(200).json(workout)
 }
 
-const deleteSingleWorkout = (req,res) =>{
-  res.status(200).json({mssg: "delete a single workout."})
+const deleteSingleWorkout = async (req,res) =>{
+  const {_id} = req.params 
+
+  if(!mongoose.Types.ObjectId.isValid(_id)){
+    return res.status(400).json({error: "this is not a valid id."})
+  }
+
+  const workout = await Workout.findByIdAndDelete({_id})
+
+  if(!workout){
+    return res.status(400).json({error: "workout coudn´t be delete it."})
+  }
+
+  res.status(200).json(workout)
 }
 
 module.exports = {getAllWorkouts,getSingleWorkout,createSingleWorkout,updateSingleWorkout,deleteSingleWorkout}
